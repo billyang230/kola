@@ -1,5 +1,5 @@
 // 可樂測試服：快取靜態檔，第二次起開啟幾乎秒開
-const V = "kola-sw-1";
+const V = "kola-sw-2";
 const STATIC = /\/(assets\/|vendor\/|boot-pack-[^/]+\.json$|assets-index\.json$)/;
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", e => {
