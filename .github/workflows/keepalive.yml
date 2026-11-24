@@ -14,4 +14,5 @@ jobs:
             -H "apikey: sb_publishable_Oe1-HcjPVt4nNVm51ozslQ_LblbFN9b" \
             "https://kcjzxbkjrnggmwhxngzl.supabase.co/rest/v1/settings?select=key&limit=1")
           echo "HTTP $code"
-          test "$code" = "200"
+          # 匿名帳號沒有讀取權限會回 401/403，但請求已經打到資料庫，同樣算有活動
+          case "$code" in 200|401|403) exit 0;; *) exit 1;; esac
