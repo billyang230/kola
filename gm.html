@@ -24,6 +24,8 @@
   table { width:100%; border-collapse:collapse; font-size:14px; }
   td { padding:8px 4px; border-top:1px solid var(--line); vertical-align:top; }
   td small { color:var(--dim); }
+  td button { margin:0; padding:6px 10px; font-size:14px; width:auto; }
+  #user-list tr { cursor:pointer; }
   .tag { font-size:11px; color:#1a1408; background:var(--gold); border-radius:4px; padding:0 4px; margin-left:4px; }
   .hidden { display:none; }
   a { color:var(--gold); }
@@ -71,6 +73,16 @@
       <div class="msg" id="list-msg"></div>
     </section>
 
+    <section>
+      <h2>存檔備份／還原</h2>
+      <label for="bk-user">帳號（也可以點上面帳號列表帶入）</label>
+      <input id="bk-user" autocapitalize="off" autocomplete="off">
+      <button id="btn-bk">查詢備份</button>
+      <table><tbody id="bk-list"></tbody></table>
+      <div class="msg" id="bk-msg"></div>
+      <small style="color:var(--dim)">每人自動保留最近 14 份（至少相隔 6 小時）。還原會覆蓋目前存檔，請先請對方登出。</small>
+    </section>
+
     <button class="secondary" id="btn-logout">登出</button>
     <p style="text-align:center;margin-top:20px"><a href="./">← 回遊戲</a></p>
   </div>
@@ -114,6 +126,7 @@ async function loadUsers() {
     b.innerHTML = "<small>最後登入</small><br>";
     b.appendChild(document.createTextNode(fmt(u.last_sign_in_at)));
     tr.append(a, b);
+    tr.onclick = () => { $("bk-user").value = u.username; $("rs-user").value = u.username; };
     $("user-list").appendChild(tr);
   }
   say("list-msg", "共 " + (data || []).length + " 個帳號", true);
@@ -150,6 +163,40 @@ $("btn-reset").onclick = async () => {
   if (error) return say("reset-msg", errText(error));
   say("reset-msg", "✅ 「" + u + "」的新密碼：" + p, true);
   $("rs-pass").value = "";
+};
+
+
+const fmtFull = t => new Date(t).toLocaleString("zh-TW", { year:"numeric", month:"numeric", day:"numeric", hour:"2-digit", minute:"2-digit" });
+const bkErr = e => /does not exist|Could not find the function/i.test(String((e && e.message) || e)) ? "還沒安裝備份功能，請先在 SQL Editor 執行 03_backup.sql" : errText(e);
+
+$("btn-bk").onclick = async () => {
+  const u = $("bk-user").value.trim();
+  if (!u) return say("bk-msg", "請輸入帳號");
+  $("bk-list").innerHTML = "";
+  say("bk-msg", "查詢中…", true);
+  const { data, error } = await sb.rpc("gm_list_backups", { p_username: u });
+  if (error) return say("bk-msg", bkErr(error));
+  if (!data || !data.length) return say("bk-msg", "「" + u + "」還沒有備份", false);
+  for (const r of data) {
+    const tr = document.createElement("tr");
+    const a = document.createElement("td");
+    a.textContent = fmtFull(r.created_at);
+    const sm = document.createElement("small"); sm.textContent = "\n" + r.kb + " KB"; sm.style.whiteSpace = "pre-wrap"; a.appendChild(sm);
+    const b = document.createElement("td"); b.style.textAlign = "right";
+    const btn = document.createElement("button"); btn.textContent = "還原";
+    btn.onclick = async () => {
+      if (!confirm("確定把「" + u + "」的存檔還原到\n" + fmtFull(r.created_at) + "？\n\n目前的存檔會被覆蓋，無法復原。請確認對方已登出。")) return;
+      btn.disabled = true;
+      const { data: res, error: e2 } = await sb.rpc("gm_restore_backup", { p_id: r.id });
+      btn.disabled = false;
+      if (e2) return say("bk-msg", bkErr(e2));
+      say("bk-msg", "✅ " + res + "\n請對方重新整理頁面再登入", true);
+    };
+    b.appendChild(btn);
+    tr.append(a, b);
+    $("bk-list").appendChild(tr);
+  }
+  say("bk-msg", "共 " + data.length + " 份備份（新到舊）", true);
 };
 
 $("btn-refresh").onclick = loadUsers;
