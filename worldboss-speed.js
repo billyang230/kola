@@ -95,14 +95,8 @@
     const inCombat = !!stop && !stop.classList.contains("hidden");
     const inBossCombat = inCombat && !!area && !area.classList.contains("hidden");
 
-    // Automatically use 5x during every combat, including normal hunting.
-    // Restore the player's previously selected speed when combat ends.
-    if (inCombat && !wasInCombat) {
-      speedBeforeCombat = selectedSpeed;
-      setSpeed(5, false);
-    } else if (!inCombat && wasInCombat) {
-      setSpeed(speedBeforeCombat);
-    }
+    // 可樂版：不再自動 5×。一般狩獵固定使用玩家選的速度（預設 1× 正常），
+    // 只有世界王面板可以手動切 1×/3×/5×。
     wasInCombat = inCombat;
 
     // Keep the existing speed controls visible only in the world-boss panel.
@@ -140,7 +134,7 @@
     }
 
     const note = document.createElement("span");
-    note.textContent = "戰鬥中自動使用 5×";
+    note.textContent = "預設 1× 正常";
     note.style.cssText = "color:#b6a684;font-size:11px;margin-left:2px;";
     speedBar.appendChild(note);
 
