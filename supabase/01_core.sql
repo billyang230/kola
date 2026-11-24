@@ -177,3 +177,9 @@ end $$;
 insert into public.settings (key, value) values
   ('dropMul', '10'), ('wbDrop', '10'), ('goldMul', '1000')
 on conflict (key) do nothing;
+
+-- ========== 資料表存取權限（新版 Supabase 不會自動開放）==========
+grant usage on schema public to anon, authenticated;
+grant select, insert, update, delete on all tables in schema public to authenticated;
+grant usage, select on all sequences in schema public to authenticated;
+grant execute on all functions in schema public to authenticated;
