@@ -15704,7 +15704,7 @@
       if (_0x2a41fb <= 0) {
         return 1;
       }
-      return 1001;
+      return Math.min(_0x2cb18d("catchupMax", 3), 1 + _0x2a41fb * 0.05);
     };
     const _0x439510 = _0x156036 => _0x156036 <= 5 ? 1 : {
       6: 0.5,
@@ -16496,16 +16496,6 @@
         home: _0x4345b7
       };
       _0x6cf19b(_0x2d6f1e);
-      for (const [_0x365f2f, _0x260b66] of Object.entries(_0x2d6f1e.eq)) {
-        if (_0x260b66) {
-          _0x2d6f1e.inv.push({
-            n: _0x260b66.n,
-            cnt: 1,
-            en: _0x260b66.en || 0
-          });
-        }
-        delete _0x2d6f1e.eq[_0x365f2f];
-      }
       (function (_0x1d2a09) {
         const _0x49b0fd = (_0x11cdf9, _0x105c87) => {
           const _0x2510a0 = _0x1d2a09.inv.find(_0x4b78e5 => _0x4b78e5.n === _0x11cdf9 && !_0x4b78e5.en);
@@ -18583,7 +18573,7 @@
     };
     const _0x4c8eef = () => _0x5994c9.rareRate ?? 0.01;
     const _0x5120ba = _0x4735c8 => /^★|^(神官|武官)/.test(_0x4735c8);
-    const _0x2a978b = () => _0x2cb18d("goldX", 1);
+    const _0x2a978b = () => _0x2cb18d("goldX", 5);
     const _0x3ac7e1 = () => _0x2cb18d("dropX", 1);
     window.__econ = () => ({
       drop: _0x3ac7e1(),
@@ -28278,7 +28268,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
     };
     const _0x3bd824 = _0xf6044 => {
       try {
-        _0xbe0b42(_0x174316() ? _0x153b86() : _0x153b86() + ":滿 " + _0x480d2c + " 級後打怪無收益,背包使用「月卡」即可開通");
+        if (_0x174316()) _0xbe0b42(_0x153b86());
       } catch (_0x5310e9) {}
     };
     const _0xe40c6e = _0x151f20 => _0x151f20 && _0x151f20.doll && _0xb420a6[_0x151f20.doll.id] && !_0xa97da8(_0x151f20, 41) ? _0xb420a6[_0x151f20.doll.id] : null;
