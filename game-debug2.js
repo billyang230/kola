@@ -4360,6 +4360,45 @@
         desc: ["📍 掉落:克特、安塔瑞斯、巴拉卡斯、巴風特、怪手、死亡騎士、法利昂、艾爾摩士兵 …等"],
         icon: "assets/icons/armors/手套.png"
       },
+      "關羽外觀珠(30分鐘)": {
+        type: "道具",
+        part: null,
+        cls: "全職業",
+        dmg: null,
+        df: null,
+        safe: null,
+        buy: 100000,
+        sell: null,
+        noSell: true,
+        desc: ["無法賣店", "無法交易", "使用後換上「關羽」外觀(青龍偃月刀、綠袍金甲、美髯)。純時裝,沒有任何能力加成,可以跟變身一起用。", "穿著時開始倒數 30 分鐘(離線也會倒數);再使用一次可以脫下,脫下時時間暫停。時間用完珠子消失,同時只能穿一顆。", "📍 說話之島「巴辛」商店販售(10 萬金幣),GM 補償也可寄送"],
+        icon: "assets/icons/items/關羽外觀珠.png"
+      },
+      "呂布外觀珠(30分鐘)": {
+        type: "道具",
+        part: null,
+        cls: "全職業",
+        dmg: null,
+        df: null,
+        safe: null,
+        buy: 100000,
+        sell: null,
+        noSell: true,
+        desc: ["無法賣店", "無法交易", "使用後換上「呂布」外觀(方天畫戟、紫金冠雉雞翎、赤紅戰袍)。純時裝,沒有任何能力加成,可以跟變身一起用。", "穿著時開始倒數 30 分鐘(離線也會倒數);再使用一次可以脫下,脫下時時間暫停。時間用完珠子消失,同時只能穿一顆。", "📍 說話之島「巴辛」商店販售(10 萬金幣),GM 補償也可寄送"],
+        icon: "assets/icons/items/呂布外觀珠.png"
+      },
+      "趙雲外觀珠(30分鐘)": {
+        type: "道具",
+        part: null,
+        cls: "全職業",
+        dmg: null,
+        df: null,
+        safe: null,
+        buy: 100000,
+        sell: null,
+        noSell: true,
+        desc: ["無法賣店", "無法交易", "使用後換上「趙雲」外觀(亮銀槍、銀盔白翎、藍底銀甲)。純時裝,沒有任何能力加成,可以跟變身一起用。", "穿著時開始倒數 30 分鐘(離線也會倒數);再使用一次可以脫下,脫下時時間暫停。時間用完珠子消失,同時只能穿一顆。", "📍 說話之島「巴辛」商店販售(10 萬金幣),GM 補償也可寄送"],
+        icon: "assets/icons/items/趙雲外觀珠.png"
+      },
       月卡: {
         type: "道具",
         part: null,
@@ -16873,7 +16912,7 @@
         }] : []).concat((_0x218ffb.tgz || 0) > _0x99b6df() ? [{
           n: "天公仔（近距離爆擊率 +" + (_0x218ffb.tgzC || 20) + "、近距離傷害 +" + (_0x218ffb.tgzD || 20) + "）",
           icon: _0x56593b("雷雨之劍")
-        }] : []).concat(_0x5df5ad(_0x218ffb)),
+        }] : []).concat(window.__kcosBuffs ? window.__kcosBuffs(_0x218ffb) : []).concat(_0x5df5ad(_0x218ffb)),
         str: _0x2fa09f.str,
         dex: _0x2fa09f.dex,
         con: _0x2fa09f.con,
@@ -16891,6 +16930,7 @@
         poly: _0x3dca20(_0x218ffb) ? {
           n: _0x218ffb.poly.n
         } : null,
+        cos: window.__kcosState ? window.__kcosState(_0x218ffb) : null,
         summon: _0x520a1f(_0x218ffb) ? _0x218ffb.summon.n : null,
         wpnRanged: _0x218ffb.ranged,
         meleeDmg: _0x218ffb.meleeDmg,
@@ -16998,7 +17038,7 @@
         anc: _0x301340.an || "",
         attr: _0x301340.at || "",
         cat: _0x19cb68.type === "武器" ? "wpn" : _0x19cb68.type === "防具" ? "arm" : _0x19cb68.type === "飾品" ? "equip" : "item",
-        usable: _0x2665cc(_0x301340.n) > 0 || !!_0x5addde[_0x301340.n] || /^(candle|panacea_)/.test(_0x247856(_0x301340.n)) || _0x301340.n === "變形卷軸" || _0x301340.n === "哨子" || _0x301340.n === "月卡" || _0x301340.n === "月卡禮包" || _0x301340.n === "安特的樹枝" || !!_0xf8a0e9[_0x301340.n],
+        usable: _0x2665cc(_0x301340.n) > 0 || !!_0x5addde[_0x301340.n] || /^(candle|panacea_)/.test(_0x247856(_0x301340.n)) || _0x301340.n === "變形卷軸" || _0x301340.n === "哨子" || _0x301340.n === "月卡" || _0x301340.n === "月卡禮包" || /外觀珠\(30分鐘\)$/.test(_0x301340.n) || _0x301340.n === "安特的樹枝" || !!_0xf8a0e9[_0x301340.n],
         equippable: !!_0x27fd7a,
         enhanceable: !!_0x27fd7a && _0x65c798(_0x301340.n),
         safe: +_0x19cb68.safe || 0,
@@ -23083,7 +23123,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
             pack: 1
           }));
         } else if (_0x49a564 === "npc_basin") {
-          return _0x48e205.shop_basin.concat(["回憶蠟燭", "箭", "銀箭"]).map(_0x38b900 => ({
+          return _0x48e205.shop_basin.concat(["回憶蠟燭", "箭", "銀箭", "關羽外觀珠(30分鐘)", "呂布外觀珠(30分鐘)", "趙雲外觀珠(30分鐘)"]).map(_0x38b900 => ({
             id: "buy:" + _0x38b900,
             n: _0x38b900,
             icon: _0x56593b(_0x38b900),
@@ -31386,6 +31426,12 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
         const _0x3fe69b = _0x414b19(_0x1af92b, _0x14f196);
         if (!_0x3fe69b) {
           return;
+        }
+        if (/外觀珠\(30分鐘\)$/.test(_0x3fe69b.n)) {
+          return window.__kcosUse(_0x29e19e, _0x3fe69b.n.replace(/外觀珠\(30分鐘\)$/, ""), _0xbe0b42, _0x2cd23c, () => {
+            _0x27779d();
+            _0x2060cc();
+          });
         }
         if (_0x3fe69b.n === "月卡") {
           return _0x7d7fb5(_0x29e19e, _0x3fe69b);
