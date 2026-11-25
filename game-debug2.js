@@ -22784,8 +22784,8 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
     }
     const _0x1a0438 = 2000000;
     _0x151d8e.回憶蠟燭.buy = 1000000;
-    _0x151d8e.對武器施法的卷軸.buy = 30000;
-    _0x151d8e.對盔甲施法的卷軸.buy = 12000;
+    _0x151d8e.對武器施法的卷軸.buy = 200000;
+    _0x151d8e.對盔甲施法的卷軸.buy = 100000;
     _0x151d8e.解除詛咒的卷軸.buy = 20000000;
     const _0x4c18f3 = {
       npc_wpn: () => Object.keys(_0x151d8e).filter(_0x40c84a => _0x151d8e[_0x40c84a].type === "武器" && _0x5a987a(_0x40c84a)),
