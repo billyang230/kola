@@ -14899,7 +14899,9 @@
     const _0x48984f = _0x1e32c5 => 1 + Math.floor(Math.random() * _0x1e32c5);
     const _0x4213cd = 32767;
     const _0x529352 = ["黑魔法研究室", "冥法軍訓練場", "格蘭肯神殿．長老之室"];
-    const _0x77949 = _0x4ba47f => _0x4ba47f && /^pride_f(30|40)$/.test(_0x4ba47f.id) ? 15 : _0x4ba47f && /^pride_f(29|37|38|39)$/.test(_0x4ba47f.id) || _0x4ba47f && _0x529352.includes(_0x4ba47f.name) ? 12 : 10;
+    // 地圖怪物數量（2026-11-25 調高約 1.8 倍：10→18、12→21、15→24）。__kolaMobBase 是舊數量，離線結算只讓這麼多隻主動怪打你，維持原本的離線難度
+    const __kolaMobBase = _0x4ba47f => _0x4ba47f && /^pride_f(30|40)$/.test(_0x4ba47f.id) ? 15 : _0x4ba47f && /^pride_f(29|37|38|39)$/.test(_0x4ba47f.id) || _0x4ba47f && _0x529352.includes(_0x4ba47f.name) ? 12 : 10;
+    const _0x77949 = _0x4ba47f => ({ 10: 18, 12: 21, 15: 24 })[__kolaMobBase(_0x4ba47f)];
     const _0xbf5f4c = new Set(_0x48e205.fxSkills || []);
     const _0x130463 = {
       搜索狀: "new_item_197",
@@ -20141,7 +20143,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
       const _0xcaf23c = _0x99b6df();
       _0x412d79.filter(Boolean).forEach(_0x398934 => {
         const _0x395650 = _0x412d79.indexOf(_0x398934);
-        if (!(_0x398934.hp <= 0) && !(_0x5612d4.hp <= 0) && (_0x39ac12 ? __kolaAggro(_0x398934) : !window.__kolaFar || !window.__kolaFar[_0x395650])) {
+        if (!(_0x398934.hp <= 0) && !(_0x5612d4.hp <= 0) && (_0x39ac12 ? _0x398934.hp < _0x398934.maxHp || _0x395650 < __kolaMobBase(_0x4167d7(_0x497ad9)) && __kolaAggro(_0x398934) : !window.__kolaFar || !window.__kolaFar[_0x395650])) {
           if (!_0x398934.nextAt) {
             _0x398934.nextAt = _0xcaf23c + 1000;
             if (_0x398934.n === "恐怖的吸血鬼") {
