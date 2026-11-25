@@ -16432,6 +16432,29 @@
       delete _0x1ae876.wpn;
       delete _0x1ae876.armor;
       _0x1ae876.inv = _0x1ae876.inv || [];
+      if (_0x1ae876._lvr !== 1) {
+        _0x1ae876._lvr = 1;
+        if ((_0x1ae876.level || 1) > 1 || (_0x1ae876.exp || 0) > 0) {
+          const __b = _0x41bad6[_0x1ae876.cls] || _0x41bad6.knight;
+          const __pn = Object.values(_0x1ae876.pana || {}).reduce((x, y) => x + y, 0);
+          _0x1ae876.level = 1;
+          _0x1ae876.exp = 0;
+          _0x1ae876.attr = Object.assign({}, __b);
+          _0x1ae876.pana = {};
+          _0x1ae876.bonusInit = _0x3d2ed7 - _0x210b15.reduce((x, k) => x + __b[k], 0);
+          _0x1ae876.bonus = 0;
+          _0x1ae876.bHp = _0x33e62b.hp;
+          _0x1ae876.bMp = _0x33e62b.mp;
+          _0x1ae876.hp = null;
+          _0x1ae876.mp = null;
+          if (__pn) {
+            const __w = _0x1ae876.inv.find(x => x.n === "純白的萬能藥" && !x.en);
+            __w ? __w.cnt += __pn : _0x1ae876.inv.push({ n: "純白的萬能藥", cnt: __pn });
+          }
+          _0x1ae876._lvrMsg = 1;
+          delete _0x1ae876.afk;
+        }
+      }
       _0x1ae876.spells = _0x1ae876.spells || [];
       _0x1ae876.skills = _0x1ae876.skills || _0x1ae876.spells.map(_0x2858a1 => "sk_" + _0x2858a1).filter(_0xa94e1f => _0x18f24e[_0xa94e1f]);
       _0x1ae876.buffs = _0x1ae876.buffs || {};
@@ -31030,6 +31053,10 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
             _0x24c05e = "lobby";
             _0x497ad9 = "lobby";
             _0x412d79 = [];
+          }
+          if (_0x29e19e._lvrMsg) {
+            delete _0x29e19e._lvrMsg;
+            _0x258df1.push("🔄 全伺服器重新開始：等級已重置為 1 級，能力點數回到初始值（請到「能力」分頁重新分配）；裝備、金幣、背包都保留" );
           }
           _0x638c9a = true;
           _0x954f70.fire("enterGame", {});
