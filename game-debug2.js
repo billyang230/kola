@@ -22796,6 +22796,8 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
     _0x151d8e.對武器施法的卷軸.buy = 200000;
     _0x151d8e.對盔甲施法的卷軸.buy = 100000;
     _0x151d8e.解除詛咒的卷軸.buy = 20000000;
+    // 商店原本 1 金幣的商品改成合理價格（賣店價維持原本、都低於買價）
+    Object.entries({"魔法能量之書": 30000, "瑪那水晶球": 40000, "瑪那斗篷": 30000, "勇敢皮帶": 20000, "紅騎士盾牌": 35000, "紅騎士頭巾": 25000, "保護者手套": 15000, "米索莉箭": 30000, "精靈T恤": 25000, "精靈體質頭盔": 20000, "精靈敏捷頭盔": 20000, "精靈水晶(召喚屬性精靈)": 100000, "★精靈水晶(召喚強力屬性精靈)": 300000, "中秋勳章": 1000000, "錄影推廣勳章": 500000, "月卡禮包": 3000000}).forEach(([_n, _p]) => { if (_0x151d8e[_n]) _0x151d8e[_n].buy = _p; });
     const _0x4c18f3 = {
       npc_wpn: () => Object.keys(_0x151d8e).filter(_0x40c84a => _0x151d8e[_0x40c84a].type === "武器" && _0x5a987a(_0x40c84a)),
       npc_arm: () => Object.keys(_0x151d8e).filter(_0x230185 => _0x151d8e[_0x230185].type === "防具" && _0x5a987a(_0x230185)),
@@ -23164,7 +23166,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
             id: "flat:" + _0x22ee2f,
             n: _0x22ee2f,
             icon: _0x56593b(_0x22ee2f),
-            price: 1,
+            price: _0x151d8e[_0x22ee2f].buy || 1,
             pack: 1
           })));
         } else {
@@ -31438,7 +31440,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
         if (/^測試禮盒/.test(_0x114eb5)) {
           return _0x2cd23c("測試禮盒已下架");
         }
-        const _0xe22e9 = _0x27aa8c && (_0x2e7e39 ? ["測試禮盒(黑暗妖精)", "測試禮盒(法師)", "測試禮盒(騎士)", "測試禮盒(妖精)", "中秋勳章", "錄影推廣勳章", "月卡禮包"].includes(_0x114eb5) ? 1 : 100 : _0x27aa8c.buy || _0x27aa8c.sell * 2);
+        const _0xe22e9 = _0x27aa8c && (_0x2e7e39 ? ["測試禮盒(黑暗妖精)", "測試禮盒(法師)", "測試禮盒(騎士)", "測試禮盒(妖精)", "中秋勳章", "錄影推廣勳章", "月卡禮包"].includes(_0x114eb5) ? _0x27aa8c.buy || 1 : 100 : _0x27aa8c.buy || _0x27aa8c.sell * 2);
         if (!_0xe22e9) {
           return;
         }
