@@ -33335,6 +33335,9 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
       },
       sellItem(_0x31b296, _0x190131) {
         const _0x4b47b5 = _0x414b19(_0x31b296, _0x190131);
+        if (_0x4b47b5 && _0x4b47b5.lock) {
+          return _0x2cd23c("「" + _0x4b47b5.n + "」已上鎖，請先解鎖再出售");
+        }
         const _0x42225e = _0x4b47b5 && ((_0x213e7d(_0x4b47b5.n) || {}).sell || 0);
         if (_0x4b47b5 && (_0x42225e || _0x581a20(_0x4b47b5.n))) {
           _0x29e19e.gold += _0x42225e;
@@ -33351,6 +33354,9 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
       },
       sellItemAll(_0x32341f, _0x3097a1) {
         const _0x3adf5f = _0x414b19(_0x32341f, _0x3097a1);
+        if (_0x3adf5f && _0x3adf5f.lock) {
+          return _0x2cd23c("「" + _0x3adf5f.n + "」已上鎖，請先解鎖再出售");
+        }
         const _0x8c61d5 = _0x3adf5f && ((_0x213e7d(_0x3adf5f.n) || {}).sell || 0);
         if (_0x3adf5f && (_0x8c61d5 || _0x581a20(_0x3adf5f.n))) {
           const _0x2919ba = _0x3adf5f.cnt;
