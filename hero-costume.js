@@ -39,9 +39,9 @@
       if(it)it.cnt=(it.cnt||0)+1;else c.inv.push({n:bead(n),cnt:1});
     });
   }
-  window.__kcosState=function(c){
+  window.__kcosState=function(c,log){
     try{gift(c)}catch(e){}
-    try{expire(c)}catch(e){}
+    try{expire(c,log)}catch(e){}
     return c&&c.cos?{n:c.cos.n,k:KEYS[c.cos.n],left:c.cos.until-Date.now()}:null;
   };
   window.__kcosBuffs=function(c){

@@ -16930,7 +16930,7 @@
         poly: _0x3dca20(_0x218ffb) ? {
           n: _0x218ffb.poly.n
         } : null,
-        cos: window.__kcosState ? window.__kcosState(_0x218ffb) : null,
+        cos: window.__kcosState ? window.__kcosState(_0x218ffb, _0x218ffb === _0x29e19e ? _0xbe0b42 : null) : null,
         summon: _0x520a1f(_0x218ffb) ? _0x218ffb.summon.n : null,
         wpnRanged: _0x218ffb.ranged,
         meleeDmg: _0x218ffb.meleeDmg,
@@ -20163,7 +20163,16 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
           _0x24c05e = "lobby";
           _0x497ad9 = _0x3e8fe9.id;
           _0x412d79 = [];
-          if (__kAutoBack) {
+          // 3 分鐘內在同一張地圖連續倒下 3 次就不再自動拉回，避免打不贏的地圖無限送死、一直自動買水把金幣燒光
+          const __kNowD = Date.now();
+          window.__kolaDeathLog = (window.__kolaDeathLog || []).filter(_0xd1 => _0xd1.z === __kDiedZone && __kNowD - _0xd1.t < 180000);
+          window.__kolaDeathLog.push({ z: __kDiedZone, t: __kNowD });
+          const __kTooMany = window.__kolaDeathLog.length >= 3;
+          if (__kAutoBack && __kTooMany) {
+            window.__kolaDeathLog = [];
+            _0xbe0b42("⚠ 3 分鐘內在 " + __kDiedZoneObj.name + " 倒下 3 次，暫停自動回去掛機；建議換低一點的狩獵場或補強裝備");
+          }
+          if (__kAutoBack && !__kTooMany) {
             const __kTownId = _0x497ad9;
             const __kMe = _0x72611d;
             _0xbe0b42("3 秒後自動回到 " + __kDiedZoneObj.name + " 繼續掛機");
@@ -31858,6 +31867,16 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
           }
           if (_0x475924.n === "藍鑽" || _0x247856(_0x475924.n) === "blue_diamond") {
             return _0x2cd23c("藍鑽不能存");
+          }
+          {
+            // 穿著中／暫停中的外觀珠不能存倉（珠子要等時間用完才消失，存走就能拿給別的角色再穿一次）
+            const _0xcosN = /外觀珠\(30分鐘\)$/.test(_0x475924.n) ? _0x475924.n.replace(/外觀珠\(30分鐘\)$/, "") : null;
+            if (_0xcosN && (_0x289808.cos && _0x289808.cos.n === _0xcosN || _0x289808.cosLeft && _0x289808.cosLeft[_0xcosN])) {
+              const _0xcosHave = _0x289808.inv.filter(_0xq => _0xq.n === _0x475924.n).reduce((_0xa, _0xq) => _0xa + (_0xq.cnt || 1), 0);
+              if (_0xcosHave - Math.max(1, _0x538ad9 | 0 || _0x475924.cnt) < 1) {
+                return _0x2cd23c("這顆外觀珠正在使用（或暫停中），不能存倉庫");
+              }
+            }
           }
           _0x538ad9 = Math.max(1, Math.min(_0x475924.cnt, _0x538ad9 | 0 || _0x475924.cnt));
           const _0x50598f = _0x1a4217();
