@@ -15785,12 +15785,73 @@
     _0x5994c9.dropMul = 10;
     _0x5994c9.wbDrop = 10;
     _0x5994c9.goldMul = 1000;
+    // 帳號共用金幣：同帳號 4 格角色共用 db.gold。角色身上的 gold 改成存取器（讀寫都指向帳號金幣）。
+    // 舊存檔第一次載入時把各角色身上的金幣加總到帳號金幣（goldShared 旗標確保只合併一次）；之後角色資料裡的 gold 只是副本，載入時一律丟掉。
+    const __kgDesc = {
+      enumerable: true,
+      configurable: true,
+      get() {
+        const _db = _0x5994c9;
+        if (_db && Array.isArray(_db.chars) && _db.chars.includes(this)) {
+          return Number(_db.gold) || 0;
+        }
+        return this.__kgLocal || 0;
+      },
+      set(_v) {
+        _v = Number(_v);
+        if (!Number.isFinite(_v)) {
+          _v = 0;
+        }
+        const _db = _0x5994c9;
+        if (_db && Array.isArray(_db.chars) && _db.chars.includes(this)) {
+          _db.gold = _v;
+        } else {
+          Object.defineProperty(this, "__kgLocal", { value: _v, writable: true, configurable: true, enumerable: false });
+        }
+      }
+    };
+    const __kgBind = _db => {
+      try {
+        if (!_db || !Array.isArray(_db.chars)) {
+          return _db;
+        }
+        const _own = _c => {
+          const _d = Object.getOwnPropertyDescriptor(_c, "gold");
+          return _d && "value" in _d ? Math.max(0, Number(_d.value) || 0) : 0;
+        };
+        if (!_db.goldShared) {
+          let _sum = 0;
+          for (const _c of _db.chars) {
+            if (_c && typeof _c == "object") {
+              _sum += _own(_c);
+            }
+          }
+          _db.gold = Math.max(0, Number(_db.gold) || 0) + _sum;
+          _db.goldShared = 1;
+        } else if (!Number.isFinite(Number(_db.gold))) {
+          _db.gold = 0;
+        }
+        for (const _c of _db.chars) {
+          if (_c && typeof _c == "object") {
+            const _d = Object.getOwnPropertyDescriptor(_c, "gold");
+            if (!_d || _d.get !== __kgDesc.get) {
+              delete _c.gold;
+              Object.defineProperty(_c, "gold", __kgDesc);
+            }
+          }
+        }
+      } catch (_e) {}
+      return _db;
+    };
+    window.__kgBind = () => __kgBind(_0x5994c9);
+    __kgBind(_0x5994c9);
     window.__mockDB = {
       get: () => _0x5994c9,
       set: _0x25bcef => {
         _0x5994c9 = Object.assign({
           chars: [null, null, null, null]
         }, _0x25bcef || {});
+        __kgBind(_0x5994c9);
       }
     };
     window.__mockSel = () => {
@@ -15808,10 +15869,12 @@
       _0x5994c9 = Object.assign({
         chars: [null, null, null, null]
       }, _0x3e39fd || {});
+      __kgBind(_0x5994c9);
       _0x29e19e = _0x1cc26e >= 0 && _0x5994c9.chars ? _0x5994c9.chars[_0x1cc26e] || null : null;
     };
     let _0x638c9a = false;
     const _0x2060cc = () => {
+      __kgBind(_0x5994c9);
       try {
         if (!!_0x29e19e && !_0x39ac12 && !_0x638c9a) {
           if (_0x24c05e === "combat") {
@@ -30996,6 +31059,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
           }
           _0x3a1205 = _0x642ab;
           _0x29e19e = null;
+          __kgBind(_0x5994c9);
           _0x5994c9.serverLevel = 100;
         }
         if (!_0x2134e9 && (function () {
@@ -31028,6 +31092,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
         while (_0x5994c9.chars.length < 4) {
           _0x5994c9.chars.push(null);
         }
+        __kgBind(_0x5994c9);
         _0x954f70.fire("charList", {
           chars: _0x5994c9.chars.map(_0x55fb22 => _0x55fb22 && {
             name: _0x55fb22.name,
@@ -31066,6 +31131,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
         _0xa03d01.auth();
       },
       selectChar(_0x4be2c7) {
+        __kgBind(_0x5994c9);
         const _0xf38152 = _0x29e19e && _0x29e19e === _0x5994c9.chars[_0x4be2c7];
         const _0x364112 = [];
         if (!_0xf38152) {
