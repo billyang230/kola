@@ -20166,7 +20166,9 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
           // 3 分鐘內在同一張地圖連續倒下 3 次就不再自動拉回，避免打不贏的地圖無限送死、一直自動買水把金幣燒光
           const __kNowD = Date.now();
           window.__kolaDeathLog = (window.__kolaDeathLog || []).filter(_0xd1 => _0xd1.z === __kDiedZone && __kNowD - _0xd1.t < 180000);
-          window.__kolaDeathLog.push({ z: __kDiedZone, t: __kNowD });
+          if (__kAutoBack) {
+            window.__kolaDeathLog.push({ z: __kDiedZone, t: __kNowD });
+          }
           const __kTooMany = window.__kolaDeathLog.length >= 3;
           if (__kAutoBack && __kTooMany) {
             window.__kolaDeathLog = [];
@@ -20555,6 +20557,33 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
       window.__kolaHold = false;
       const _0x37deb9 = Math.round(_0x347da5 * 10);
       let _0x5940f8 = 0;
+      // 離線死亡也自動回原地圖繼續掛（3 秒後；跟線上一樣，離線時間內 3 分鐘倒下 3 次就停在村莊，避免無限送死）
+      const __kOffZone = _0x497ad9;
+      const __kOffZoneObj = _0x4e96bb;
+      let __kOffDeaths = [];
+      const __kOffRevive = () => {
+        if (_0x24c05e === "combat" || !_0x113bbf || !_0x113bbf.died || _0x4fecf8 || _0x106d82.guest || !__kOffZoneObj || __kOffZoneObj.safe || __kOffZone === "oblivion_island" || !(_0x2b705e.hp > 0) || _0x29e19e !== _0x2b705e) {
+          return false;
+        }
+        __kOffDeaths = __kOffDeaths.filter(_0xd2 => _0x5940f8 - _0xd2 < 1800);
+        __kOffDeaths.push(_0x5940f8);
+        if (__kOffDeaths.length >= 3) {
+          _0xbe0b42("⚠ 離線掛機中 3 分鐘內倒下 3 次，停在村莊不再自動回去；建議換低一點的狩獵場");
+          return false;
+        }
+        _0x5940f8 += 30;
+        _0xe98026 += 3000;
+        _0x113bbf.died = false;
+        _0x497ad9 = __kOffZone;
+        _0x412d79 = [];
+        _0x1c163d = Array.from({
+          length: _0x77949(__kOffZoneObj)
+        }, () => _0x99b6df() + 2000);
+        _0x24c05e = "combat";
+        _0x520f8f = 1;
+        _0xbe0b42("（離線）自動回到 " + __kOffZoneObj.name + " 繼續掛機");
+        return true;
+      };
       const _0x118fd0 = 18000;
       const _0x57b956 = () => {
         const _0x8c67a6 = {};
@@ -20577,7 +20606,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
             _0xad836b[_0x56e6c1.key] = _0x43dc67(_0x2b705e, _0x56e6c1).exp;
           }
         }
-        for (; _0x5940f8 < _0x118fd0 && _0x24c05e === "combat"; _0x5940f8++) {
+        for (; _0x5940f8 < _0x118fd0 && (_0x24c05e === "combat" || __kOffRevive()); _0x5940f8++) {
           _0xe98026 += 100;
           _0x553644();
         }
@@ -20738,7 +20767,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
           _0x5940f8 = _0x37deb9;
         }
       } else {
-        for (; _0x5940f8 < _0x37deb9 && _0x24c05e === "combat"; _0x5940f8++) {
+        for (; _0x5940f8 < _0x37deb9 && (_0x24c05e === "combat" || __kOffRevive()); _0x5940f8++) {
           _0xe98026 += 100;
           _0x553644();
         }
