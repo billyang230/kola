@@ -24610,8 +24610,8 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
           ask: "管理者帳號建立新角色時，自動升到幾級（1~70）\n預設 60；改完之後下次建立角色就會用新的等級"
         }, {
           label: "閒置自動登出（分鐘）",
-          val: _0x2cb18d("idleMin", 10) ? _0x2cb18d("idleMin", 10) + " 分鐘" : "關閉",
-          raw: _0x2cb18d("idleMin", 10),
+          val: "永久關閉",
+          raw: 0,
           ev: "mockSetNum",
           key: "idleMin",
           ask: "玩家完全沒有操作（點擊、按鍵、觸控）超過幾分鐘，就自動存檔並登出\n預設 10；填 0 = 關閉；管理者帳號不受影響"
@@ -28530,7 +28530,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
         if (_0x47eae6()) {
           return;
         }
-        const _0x4e8026 = +_0x2cb18d("idleMin", 0);
+        const _0x4e8026 = 0; /* 閒置自動登出已永久關閉（不再讀伺服器上存的 idleMin） */
         if (!(_0x4e8026 > 0)) {
           return;
         }
