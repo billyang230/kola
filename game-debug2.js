@@ -20156,9 +20156,31 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
             _0x113bbf.died = true;
           }
           _0x72611d.hp = _0x72611d.maxHp;
+          // 死亡後自動回原本掛機的地圖重新狩獵（離線結算、王戰、隊伍客人、遺忘之島除外）
+          const __kDiedZone = _0x497ad9;
+          const __kDiedZoneObj = _0x4167d7(__kDiedZone);
+          const __kAutoBack = !_0x39ac12 && !_0x4fecf8 && !_0x106d82.guest && __kDiedZoneObj && !__kDiedZoneObj.safe && __kDiedZone !== "oblivion_island" && _0x24c05e === "combat";
           _0x24c05e = "lobby";
           _0x497ad9 = _0x3e8fe9.id;
           _0x412d79 = [];
+          if (__kAutoBack) {
+            const __kTownId = _0x497ad9;
+            const __kMe = _0x72611d;
+            _0xbe0b42("3 秒後自動回到 " + __kDiedZoneObj.name + " 繼續掛機");
+            clearTimeout(window.__kolaDeathBackT);
+            window.__kolaDeathBackT = setTimeout(() => {
+              try {
+                // 玩家這 3 秒內自己移動了、換角了或正在離線結算，就不要硬拉回去
+                if (_0x29e19e !== __kMe || _0x39ac12 || _0x24c05e !== "lobby" || _0x497ad9 !== __kTownId || !(__kMe.hp > 0)) {
+                  return;
+                }
+                _0xa03d01.setZone(__kDiedZone);
+                if (_0x497ad9 === __kDiedZone && _0x24c05e === "zone") {
+                  _0xa03d01.attack();
+                }
+              } catch (_0x5e1b20) {}
+            }, 3000);
+          }
           if (_0x2134e9) {
             try {
               _0x12d6f4("death", {
