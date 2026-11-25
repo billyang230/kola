@@ -29,7 +29,18 @@
     c.cos={n:n,until:now+left};
     log("✨ 換上「"+n+"」外觀（剩 "+fmt(left)+"）。純外觀，不影響能力");toast("換上「"+n+"」外觀");save();
   };
+  /* 一次性贈送：使用者要求先給「綺綺」三種外觀珠各一顆試用（2026-11-25） */
+  var GIFT={"綺綺":["關羽","呂布","趙雲"]};
+  function gift(c){
+    if(!c||!c.inv||c.kcosGift1||!GIFT[c.name])return;
+    c.kcosGift1=1;
+    GIFT[c.name].forEach(function(n){
+      var it=null;for(var i=0;i<c.inv.length;i++){var x=c.inv[i];if(x&&x.n===bead(n)&&!x.lock){it=x;break}}
+      if(it)it.cnt=(it.cnt||0)+1;else c.inv.push({n:bead(n),cnt:1});
+    });
+  }
   window.__kcosState=function(c){
+    try{gift(c)}catch(e){}
     try{expire(c)}catch(e){}
     return c&&c.cos?{n:c.cos.n,k:KEYS[c.cos.n],left:c.cos.until-Date.now()}:null;
   };
