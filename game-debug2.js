@@ -12898,7 +12898,7 @@
       req: {
         dark: 30
       },
-      desc: "持續 960 秒攻擊速度提升:攻擊間隔 ×0.85、技能冷卻同步縮短;與加速藥水(綠水)、加速術「可以同時生效並且相乘」,不會互相取消(合計約 ×0.57)\n你的步伐如影般輕快。\n📐 ⚠ 名字叫「行走加速」,實際加的是「攻擊速度」(攻擊間隔 ×0.85)。很多人以為它跟綠水(自我加速藥水)、加速術是同一種加速、開了會互相取消——不會:它們是兩套獨立的效果,同時開會相乘(0.85 × 0.67 ≈ 0.57,大約等於攻擊次數 1.76 倍),黑暗妖精兩個一起開才是最快的。",
+      desc: "持續 960 秒攻擊速度提升:攻擊間隔 ×0.85、技能冷卻同步縮短;與加速藥水(綠水)、加速術「可以同時生效並且相乘」,不會互相取消(合計約 ×0.64)\n你的步伐如影般輕快。\n📐 ⚠ 名字叫「行走加速」,實際加的是「攻擊速度」(攻擊間隔 ×0.85)。很多人以為它跟綠水(自我加速藥水)、加速術是同一種加速、開了會互相取消——不會:它們是兩套獨立的效果,同時開會相乘(0.85 × 0.75 ≈ 0.64,大約等於攻擊次數 1.57 倍),黑暗妖精兩個一起開才是最快的。",
       icon: "assets/icons/skills/行走加速.png",
       ex: true,
       dur: 960,
@@ -13936,7 +13936,7 @@
         mage: 24,
         elf: 48
       },
-      desc: "持續 1200 秒攻擊速度提升:攻擊間隔 ×0.67、技能冷卻同步縮短;與加速藥水不疊加、與勇敢藥水可疊加\n你感到身體變得非常輕盈。\n📐 與強力加速術效果完全相同,只差 MP 與持續時間。",
+      desc: "持續 1200 秒攻擊速度提升:攻擊間隔 ×0.75、技能冷卻同步縮短;與加速藥水不疊加、與勇敢藥水可疊加\n你感到身體變得非常輕盈。\n📐 與強力加速術效果完全相同,只差 MP 與持續時間。",
       icon: "assets/icons/skills/加速術.png",
       ex: false,
       dur: 1200,
@@ -14141,7 +14141,7 @@
       req: {
         mage: 28
       },
-      desc: "持續 2400 秒攻擊速度提升:攻擊間隔 ×0.67、技能冷卻同步縮短;與加速藥水不疊加、與勇敢藥水可疊加\n你感到身體變得非常輕盈。\n📐 與加速術效果完全相同,只差 MP 與持續時間。",
+      desc: "持續 2400 秒攻擊速度提升:攻擊間隔 ×0.75、技能冷卻同步縮短;與加速藥水不疊加、與勇敢藥水可疊加\n你感到身體變得非常輕盈。\n📐 與加速術效果完全相同,只差 MP 與持續時間。",
       icon: "assets/icons/skills/強力加速術.png",
       ex: false,
       dur: 2400,
@@ -15666,17 +15666,17 @@
     const _0x5addde = {
       自我加速藥水: {
         dur: 300,
-        spd: ["haste", 0.67]
+        spd: ["haste", 0.75]
       },
       勇敢藥水: {
         dur: 300,
         cls: "knight",
-        spd: ["brave", 0.67]
+        spd: ["brave", 0.75]
       },
       精靈餅乾: {
         dur: 300,
         cls: "elf",
-        spd: ["brave", 0.85]
+        spd: ["brave", 0.87]
       },
       藍色藥水: {
         dur: 600,
@@ -15695,8 +15695,8 @@
     };
     const _0x4bd261 = [["haste", "自我加速藥水"], ["brave", "勇敢藥水"], ["blue", "藍色藥水"], ["cautious", "慎重藥水"], ["elfcookie", "精靈餅乾"]];
     const _0x526bdf = {
-      加速術: ["haste", 0.67],
-      強力加速術: ["haste", 0.67],
+      加速術: ["haste", 0.75],
+      強力加速術: ["haste", 0.75],
       行走加速: ["walk", 0.85]
     };
     const _0xbe3192 = _0x2d46ec => {
@@ -16387,6 +16387,32 @@
         }
       }
       _0x31f33c.expToNext = _0xfe760b(_0x260967);
+      {
+        /* 換地圖／切分流時加成（娃娃、血盟、靈魂昇華等）可能晚一點才算進來：
+           先把被最大值暫時截掉的 HP/MP 記下，15 秒內最大值恢復就補回去，不會平白損失 */
+        const __now = Date.now(), __hk = _0x31f33c._hk;
+        if (__hk && __now - __hk.t < 15000) {
+          if (__hk.dh > 0 && _0x31f33c.hp != null && _0x31f33c.maxHp > __hk.mh) {
+            const __a = Math.min(__hk.dh, _0x31f33c.maxHp - _0x31f33c.hp);
+            if (__a > 0) { _0x31f33c.hp += __a; __hk.dh -= __a; }
+            __hk.mh = _0x31f33c.maxHp;
+          }
+          if (__hk.dm > 0 && _0x31f33c.mp != null && _0x31f33c.maxMp > __hk.mm) {
+            const __b = Math.min(__hk.dm, _0x31f33c.maxMp - _0x31f33c.mp);
+            if (__b > 0) { _0x31f33c.mp += __b; __hk.dm -= __b; }
+            __hk.mm = _0x31f33c.maxMp;
+          }
+          if (!(__hk.dh > 0) && !(__hk.dm > 0)) delete _0x31f33c._hk;
+        } else if (__hk) {
+          delete _0x31f33c._hk;
+        }
+        const __dh = _0x31f33c.hp != null && _0x31f33c.hp > _0x31f33c.maxHp ? _0x31f33c.hp - _0x31f33c.maxHp : 0,
+          __dm = _0x31f33c.mp != null && _0x31f33c.mp > _0x31f33c.maxMp ? _0x31f33c.mp - _0x31f33c.maxMp : 0;
+        if (__dh > 0 || __dm > 0) {
+          const __o = _0x31f33c._hk && __now - _0x31f33c._hk.t < 15000 ? _0x31f33c._hk : { dh: 0, dm: 0 };
+          _0x31f33c._hk = { dh: (__o.dh || 0) + __dh, dm: (__o.dm || 0) + __dm, mh: _0x31f33c.maxHp, mm: _0x31f33c.maxMp, t: __now };
+        }
+      }
       _0x31f33c.hp = Math.min(_0x31f33c.hp == null ? _0x31f33c.maxHp : _0x31f33c.hp, _0x31f33c.maxHp);
       _0x31f33c.mp = Math.min(_0x31f33c.mp == null ? _0x31f33c.maxMp : _0x31f33c.mp, _0x31f33c.maxMp);
     }
@@ -20042,6 +20068,16 @@
       _0x441e59(_0x2910b0);
       _0x27779d(_0x288c1b);
     }
+const __kNT = {training:"town_talking",talking_island:"town_talking",talking_island_port:"town_talking",zone_13:"town_talking",zone_14:"town_talking",
+ silver_knight:"town_silver_knight",kent:"town_silver_knight",zone_15:"town_silver_knight",zone_16:"town_silver_knight",zone_17:"town_silver_knight",
+ zone_01:"town_elf",elf_forest:"town_elf",mirror_forest:"town_elf",
+ gludio:"town_gludio",windwood:"town_gludio",desert:"town_gludio",zone_06:"town_gludio",zone_07:"town_gludio",zone_08:"town_gludio",zone_09:"town_gludio",zone_10:"town_gludio",zone_11:"town_gludio",zone_12:"town_gludio",zone_22:"town_gludio",zone_23:"town_gludio",zone_24:"town_gludio",zone_25:"town_gludio",zone_34:"town_gludio",zone_35:"town_gludio",zone_36:"town_gludio",
+ giran:"town_giran",dragon_valley:"town_giran",zone_18:"town_giran",zone_19:"town_giran",zone_20:"town_giran",zone_21:"town_giran",zone_26:"town_giran",zone_27:"town_giran",zone_28:"town_giran",zone_29:"town_giran",zone_30:"town_giran",zone_31:"town_giran",zone_32:"town_giran",zone_33:"town_giran",
+ heine:"town_heine",eva_kingdom:"town_heine",dream_island:"town_heine",
+ zone_02:"town_oren",zone_03:"town_oren",zone_04:"town_oren",zone_05:"town_oren",crystal_cave1:"town_oren",crystal_cave2:"town_oren",crystal_cave3:"town_oren",fire_dragon:"town_oren",
+ zone_37:"town_ivory_tower",zone_38:"town_ivory_tower",zone_39:"town_ivory_tower",zone_40:"town_ivory_tower",zone_41:"town_ivory_tower",
+ twilight_mt:"town_witon",rastabad_cave1:"town_witon",rastabad_cave2:"town_witon",rastabad_cave3:"town_witon",rastabad_gate:"town_witon",rastabad_beast:"town_witon",dark_magic_lab:"town_witon",necro_training:"town_witon",elder_room:"town_witon"};
+    const __kNearTown = (z) => z ? (__kNT[z] || (/^pride_f/.test(z) ? "town_witon" : null)) : null;
     function _0x441e59(_0x72611d) {
       if (_0x72611d.hp <= 0 && _0x106d82.on && _0x106d82.list.some(_0x5b34eb => _0x5b34eb.name !== _0x72611d.name && !_0x5b34eb.dead)) {
         if (!_0x72611d.coDead) {
@@ -20054,7 +20090,11 @@
         if (_0x72611d.hp <= 0) {
           const _0x26bd5c = _0x4fecf8 && _0x72611d.level < _0xebb19 ? Math.min(Math.max(0, Math.floor(_0x72611d.exp)), Math.floor(_0xfe760b(_0x72611d.level) * 0.05)) : 0;
           _0x72611d.exp = Math.max(0, _0x72611d.exp - _0x26bd5c);
-          const _0x3e8fe9 = _0x4167d7(_0x72611d.home) || _0x4167d7(_0x4345b7);
+          const _0x3e8fe9 = _0x4167d7(__kNearTown(_0x497ad9)) || _0x4167d7(_0x72611d.home) || _0x4167d7(_0x4345b7);
+          if (_0x72611d.poly) {
+            _0xbe0b42("變身「" + _0x72611d.poly.n + "」因死亡而解除");
+            delete _0x72611d.poly;
+          }
           _0xbe0b42("你被擊倒了，" + (_0x26bd5c ? "損失經驗 " + _0x26bd5c.toLocaleString() + "（5%）" : "沒有損失經驗") + "，回到" + _0x3e8fe9.name);
           _0x59a96b(_0x72611d, "因為你倒下");
           if (_0x113bbf) {
