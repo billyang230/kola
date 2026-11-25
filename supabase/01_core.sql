@@ -111,7 +111,7 @@ returns boolean language plpgsql security definer set search_path = public as $$
 begin
   if auth.uid() is null then raise exception 'not signed in'; end if;
   insert into public.saves (user_id, username, data, updated_at)
-  values (auth.uid(), p_username, jsonb_build_object('chars', jsonb_build_array(null, null, null), 'sid', p_sid), now())
+  values (auth.uid(), p_username, jsonb_build_object('chars', jsonb_build_array(null, null, null, null), 'sid', p_sid), now())
   on conflict (user_id) do update
     set data = jsonb_set(coalesce(saves.data, '{}'::jsonb), '{sid}', to_jsonb(p_sid)),
         username = excluded.username,

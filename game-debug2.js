@@ -15733,7 +15733,7 @@
     const _0x1e7c27 = _0x14cc18 => /臂甲/.test(_0x5671d6(_0x14cc18 || ""));
     let _0x3a1205 = "mockSave_v4";
     let _0x5994c9 = {
-      chars: [null, null, null]
+      chars: [null, null, null, null]
     };
     const _0x2134e9 = window.ONLINE || null;
     if (!_0x2134e9) {
@@ -15748,7 +15748,7 @@
       get: () => _0x5994c9,
       set: _0x25bcef => {
         _0x5994c9 = Object.assign({
-          chars: [null, null, null]
+          chars: [null, null, null, null]
         }, _0x25bcef || {});
       }
     };
@@ -15765,7 +15765,7 @@
     };
     window.__setCbMirror = (_0x3e39fd, _0x1cc26e) => {
       _0x5994c9 = Object.assign({
-        chars: [null, null, null]
+        chars: [null, null, null, null]
       }, _0x3e39fd || {});
       _0x29e19e = _0x1cc26e >= 0 && _0x5994c9.chars ? _0x5994c9.chars[_0x1cc26e] || null : null;
     };
@@ -30894,11 +30894,11 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
               _0x1ee701 = localStorage.getItem("mockSave_v4");
             }
             _0x5994c9 = Object.assign({
-              chars: [null, null, null]
+              chars: [null, null, null, null]
             }, _0x1ee701 ? JSON.parse(_0x1ee701) : {});
           } catch (_0x65c6b4) {
             _0x5994c9 = {
-              chars: [null, null, null]
+              chars: [null, null, null, null]
             };
           }
           _0x3a1205 = _0x642ab;
@@ -30908,7 +30908,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
         if (!_0x2134e9 && (function () {
           const _0x4b18e6 = _0x5a1524[String(_0x1a8214()).toLowerCase()];
           if (_0x4b18e6 && _0x5994c9.presetV !== 1) {
-            _0x5994c9.chars = [null, null, null];
+            _0x5994c9.chars = [null, null, null, null];
             _0x29e19e = null;
             _0x4b18e6.forEach((_0x16e02a, _0x133a11) => {
               _0x5994c9.chars[_0x133a11] = _0x5edf0f(_0x16e02a, _0x133a11);
@@ -30929,6 +30929,12 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
         _0x954f70.fire("authOk", {
           username: _0x1a8214()
         });
+        if (!Array.isArray(_0x5994c9.chars)) {
+          _0x5994c9.chars = [];
+        }
+        while (_0x5994c9.chars.length < 4) {
+          _0x5994c9.chars.push(null);
+        }
         _0x954f70.fire("charList", {
           chars: _0x5994c9.chars.map(_0x55fb22 => _0x55fb22 && {
             name: _0x55fb22.name,
