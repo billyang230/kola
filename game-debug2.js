@@ -14938,9 +14938,9 @@
     const _0x48984f = _0x1e32c5 => 1 + Math.floor(Math.random() * _0x1e32c5);
     const _0x4213cd = 32767;
     const _0x529352 = ["黑魔法研究室", "冥法軍訓練場", "格蘭肯神殿．長老之室"];
-    // 地圖怪物數量（2026-11-25 調高約 1.8 倍：10→18、12→21、15→24）。__kolaMobBase 是舊數量，離線結算只讓這麼多隻主動怪打你，維持原本的離線難度
+    // 地圖怪物數量（2026-11-25 再調高約 2.5 倍：10→25、12→30、15→36）。__kolaMobBase 是舊數量，離線結算只讓這麼多隻主動怪打你，維持原本的離線難度
     const __kolaMobBase = _0x4ba47f => _0x4ba47f && /^pride_f(30|40)$/.test(_0x4ba47f.id) ? 15 : _0x4ba47f && /^pride_f(29|37|38|39)$/.test(_0x4ba47f.id) || _0x4ba47f && _0x529352.includes(_0x4ba47f.name) ? 12 : 10;
-    const _0x77949 = _0x4ba47f => ({ 10: 18, 12: 21, 15: 24 })[__kolaMobBase(_0x4ba47f)];
+    const _0x77949 = _0x4ba47f => ({ 10: 25, 12: 30, 15: 36 })[__kolaMobBase(_0x4ba47f)];
     const _0xbf5f4c = new Set(_0x48e205.fxSkills || []);
     const _0x130463 = {
       搜索狀: "new_item_197",
