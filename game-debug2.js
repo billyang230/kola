@@ -20277,11 +20277,31 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
     const __kolaAggroList = new Set(["骷髏", "骷髏弓箭手", "骷髏斧手", "骷髏槍兵", "史巴托", "食屍鬼", "人形殭屍", "地獄犬", "夏洛伯", "食人妖精王"]);
     const __kolaAggroUnd = /(骷髏|殭屍|食屍鬼|史巴托|木乃伊|鬼魂|幽靈|吸血鬼|死亡騎士|巫妖|亡靈|惡靈|怨靈|魂騎士|不死族)/;
     const __kolaAggro = _0x4e1 => !!_0x4e1 && (__kolaAggroList.has(_0x4e1.n) || __kolaAggroUnd.test(_0x4e1.n || "") || _0x4e1.hp < _0x4e1.maxHp);
+    // 同族支援（離線固定規則）：前 base 隻裡有同族被打過（HP 未滿），同族中編號最前面的沒受傷的也會一起打你（每族最多 2 隻來幫、連同被打的最多 3 隻）。跟即時地圖一樣排除王級怪。
+    const __kolaFams = [[/骷髏|史巴托/, "骷髏"], [/殭屍|食屍鬼|木乃伊/, "殭屍"], [/鬼魂|幽靈|怨靈|惡靈/, "鬼魂"], [/狼人|萊肯/, "狼人"], [/妖魔/, "妖魔"], [/哥布林/, "哥布林"], [/侏儒/, "侏儒"], [/高崙/, "高崙"], [/蜥蜴/, "蜥蜴"], [/^(巨蟻|巨大兵蟻)$/, "蟻"], [/^(狼|冰原狼|牧羊犬|哈士奇|杜賓狗|地獄犬)$/, "犬"], [/^(強盜|強盜頭目)$/, "強盜"], [/^(卡司特)$/, "卡司特"]];
+    const __kolaFamX = /王|女皇|神射手|死亡騎士|巫妖|吸血鬼|闇黑君王/;
+    const __kolaFam = _0xn => {
+      if (!_0xn || __kolaFamX.test(_0xn)) return "";
+      for (const [_0xr, _0xf] of __kolaFams) if (_0xr.test(_0xn)) return _0xf;
+      return _0xn;
+    };
+    const __kolaAssistOff = (_0xm, _0xi, _0xbase) => {
+      const _0xf = __kolaFam(_0xm.n);
+      if (!_0xf || _0xm.hp < _0xm.maxHp) return false;
+      let _0xhurt = 0, _0xrank = 0;
+      for (let _0xj = 0; _0xj < Math.min(_0xbase, _0x412d79.length); _0xj++) {
+        const _0xq = _0x412d79[_0xj];
+        if (!_0xq || _0xq.hp <= 0 || _0xj === _0xi || __kolaFam(_0xq.n) !== _0xf) continue;
+        if (_0xq.hp < _0xq.maxHp) _0xhurt++;
+        else if (_0xj < _0xi) _0xrank++;
+      }
+      return _0xhurt > 0 && _0xrank < 2 && _0xhurt + _0xrank < 3;
+    };
     function _0x50b18a(_0x5612d4, _0x28d4a0) {
       const _0xcaf23c = _0x99b6df();
       _0x412d79.filter(Boolean).forEach(_0x398934 => {
         const _0x395650 = _0x412d79.indexOf(_0x398934);
-        if (!(_0x398934.hp <= 0) && !(_0x5612d4.hp <= 0) && (_0x39ac12 ? _0x398934.hp < _0x398934.maxHp || _0x395650 < __kolaMobBase(_0x4167d7(_0x497ad9)) && __kolaAggro(_0x398934) : !window.__kolaFar || !window.__kolaFar[_0x395650])) {
+        if (!(_0x398934.hp <= 0) && !(_0x5612d4.hp <= 0) && (_0x39ac12 ? _0x398934.hp < _0x398934.maxHp || _0x395650 < __kolaMobBase(_0x4167d7(_0x497ad9)) && (__kolaAggro(_0x398934) || __kolaAssistOff(_0x398934, _0x395650, __kolaMobBase(_0x4167d7(_0x497ad9)))) : !window.__kolaFar || !window.__kolaFar[_0x395650])) {
           if (!_0x398934.nextAt) {
             _0x398934.nextAt = _0xcaf23c + 1000;
             if (_0x398934.n === "恐怖的吸血鬼") {
