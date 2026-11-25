@@ -20474,6 +20474,8 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
       };
       _0x24c05e = "combat";
       _0x39ac12 = true;
+      // 離線結算時畫面不會更新，即時地圖「走向怪物中」的暫停旗標會卡住，導致整段掛機 0 擊殺：結算期間一律解除
+      window.__kolaHold = false;
       const _0x37deb9 = Math.round(_0x347da5 * 10);
       let _0x5940f8 = 0;
       const _0x118fd0 = 18000;
