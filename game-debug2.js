@@ -4420,7 +4420,7 @@
         safe: null,
         buy: null,
         sell: null,
-        desc: ["無法賣店", "無法交易", "打開後獲得:月卡 ×1、對武器施法的卷軸 ×6、對盔甲施法的卷軸 ×8、娃娃十連抽 ×1、金幣 500,000。"],
+        desc: ["無法賣店", "無法交易", "已停售。打開後獲得:對武器施法的卷軸 ×6、對盔甲施法的卷軸 ×8、娃娃十連抽 ×1、金幣 500,000。"],
         icon: "assets/icons/items/月卡禮包.png"
       },
       月光碎片: {
@@ -23191,13 +23191,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
             icon: _0x56593b(_0x38b900),
             price: _0x151d8e[_0x38b900].buy || _0x151d8e[_0x38b900].sell * 2,
             pack: _0x5eb9a3.includes(_0x38b900) ? 1000 : 1
-          })).concat(["中秋勳章", "錄影推廣勳章", "月卡禮包"].map(_0x22ee2f => ({
-            id: "flat:" + _0x22ee2f,
-            n: _0x22ee2f,
-            icon: _0x56593b(_0x22ee2f),
-            price: _0x151d8e[_0x22ee2f].buy || 1,
-            pack: 1
-          })));
+          }));
         } else {
           return [];
         }
@@ -28313,7 +28307,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
       const _0x56f33d = _0x18b367 => String(_0x18b367).padStart(2, "0");
       return _0x13d1e0.getFullYear() + "/" + _0x56f33d(_0x13d1e0.getMonth() + 1) + "/" + _0x56f33d(_0x13d1e0.getDate()) + " " + _0x56f33d(_0x13d1e0.getHours()) + ":" + _0x56f33d(_0x13d1e0.getMinutes());
     };
-    const _0x174316 = () => (_0x5994c9.mcUntil || 0) > Date.now();
+    const _0x174316 = () => false; // 月卡已移除（單人玩不需要）
     const _0xa97da8 = (_0x34a7cc, _0x49f7fe) => false;
     const _0xd9ce31 = (_0x5084da, _0xc3e246) => {
       _0x2cd23c(_0x5084da + "需要「月卡」才能使用(滿 " + _0xc3e246 + " 級後)。月卡請向管理者購買");
@@ -28328,11 +28322,9 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
       }
     };
     const _0x7d7fb5 = (_0x1c0d73, _0x52fb05) => {
-      const _0x3a9c30 = Math.max(Date.now(), _0x5994c9.mcUntil || 0);
-      _0x5994c9.mcUntil = _0x3a9c30 + _0x45e30e;
       _0x53c5ff(_0x52fb05);
-      _0xbe0b42("使用 月卡:效期 +30 天," + _0x153b86());
-      _0x2cd23c("月卡已開通(帳號共用)");
+      _0xbe0b42("月卡已取消：現在不用月卡也能拿到全部收益，這張月卡已回收");
+      _0x2cd23c("月卡已取消，不用月卡也能正常玩");
       _0x27779d();
       _0x2060cc();
     };
@@ -28355,7 +28347,6 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
     };
     const _0x4fd174 = (_0x455934, _0x2f45e4) => {
       _0x53c5ff(_0x2f45e4);
-      _0x1d3999("月卡", 1);
       _0x1d3999("對武器施法的卷軸", 6);
       _0x1d3999("對盔甲施法的卷軸", 8);
       _0x455934.gold += 500000;
@@ -28370,7 +28361,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
       } catch (_0x10dcc4) {
         _0x380df1 = [];
       }
-      _0xbe0b42("打開 月卡禮包:月卡 ×1、對武器施法的卷軸 ×6、對盔甲施法的卷軸 ×8、金幣 500,000" + (_0x380df1.length ? "、娃娃十連抽:" + _0x380df1.map(_0x66b026 => _0xb420a6[_0x66b026.id].n + (_0x66b026.dup ? "(碎片)" : "")).join("、") : ""));
+      _0xbe0b42("打開 月卡禮包:對武器施法的卷軸 ×6、對盔甲施法的卷軸 ×8、金幣 500,000" + (_0x380df1.length ? "、娃娃十連抽:" + _0x380df1.map(_0x66b026 => _0xb420a6[_0x66b026.id].n + (_0x66b026.dup ? "(碎片)" : "")).join("、") : ""));
       _0x27779d();
       _0x2060cc();
       if (_0x380df1.length) {
@@ -31469,7 +31460,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
         if (/^測試禮盒/.test(_0x114eb5)) {
           return _0x2cd23c("測試禮盒已下架");
         }
-        const _0xe22e9 = _0x27aa8c && (_0x2e7e39 ? ["測試禮盒(黑暗妖精)", "測試禮盒(法師)", "測試禮盒(騎士)", "測試禮盒(妖精)", "中秋勳章", "錄影推廣勳章", "月卡禮包"].includes(_0x114eb5) ? _0x27aa8c.buy || 1 : 100 : _0x27aa8c.buy || _0x27aa8c.sell * 2);
+        const _0xe22e9 = _0x27aa8c && (_0x2e7e39 ? ["測試禮盒(黑暗妖精)", "測試禮盒(法師)", "測試禮盒(騎士)", "測試禮盒(妖精)", "中秋勳章", "錄影推廣勳章", "月卡禮包"].includes(_0x114eb5) ? 0 : 100 : _0x27aa8c.buy || _0x27aa8c.sell * 2);
         if (!_0xe22e9) {
           return;
         }
