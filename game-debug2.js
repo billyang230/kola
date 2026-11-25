@@ -22122,12 +22122,6 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
         type: "craft",
         d: "神域另一位鐵匠。用祝福粉末、銀礦石與惡魔之氣息，打造騎士專用的「惡魔王雙手劍」。"
       }, {
-        id: "npc_godhands",
-        n: "神之左右手",
-        title: "武器商店",
-        type: "shop",
-        d: "神域鐵匠兄弟的武器庫：所有職業的武器每把 100 金幣，直接是 +10（古代武器等無法強化的為 +0）。"
-      }, {
         id: "npc_os",
         n: "歐斯",
         title: "試煉",
@@ -31350,6 +31344,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
           }
         }
         if (/^gh:/.test(_0x481935)) {
+          return _0x2cd23c("神之左右手已下架");
           const _0x438f7c = _0x481935.slice(3);
           if (!_0x4c306c().includes(_0x438f7c)) {
             return;
