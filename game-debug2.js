@@ -15704,7 +15704,7 @@
       if (_0x2a41fb <= 0) {
         return 1;
       }
-      return Math.min(_0x2cb18d("catchupMax", 3), 1 + _0x2a41fb * 0.05);
+      return 1; // 伺服器追趕已取消（固定 ×1）
     };
     const _0x439510 = _0x156036 => _0x156036 <= 5 ? 1 : {
       6: 0.5,
@@ -20133,11 +20133,15 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
     const _0x39aa06 = /狼|犬|虎|豹|獅|蜂|蝙蝠|蜘蛛|蛇|鼠|兔|貓|猴|蟻|蠍|鳥|鷹|影魔|閃電|火蜥蜴|獨角獸|魂騎士|史巴托|鬼火/;
     const _0x2fc4bd = /巨人|龍|歐姆|守門人|闇黑君王|術士|法師|巫|長老|守護者|殭屍|木乃伊|食屍鬼|骷髏|冰人|鎧甲|伊弗利特|火炎蛋|死神/;
     let _0x38c472 = 0;
+    // 離線結算固定規則：主動怪（名單＋不死系）一定會打你；非主動怪被你打過（HP 未滿）才會反擊。不再看切出去那一刻地圖上的距離。
+    const __kolaAggroList = new Set(["骷髏", "骷髏弓箭手", "骷髏斧手", "骷髏槍兵", "史巴托", "食屍鬼", "人形殭屍", "地獄犬", "夏洛伯", "食人妖精王"]);
+    const __kolaAggroUnd = /(骷髏|殭屍|食屍鬼|史巴托|木乃伊|鬼魂|幽靈|吸血鬼|死亡騎士|巫妖|亡靈|惡靈|怨靈|魂騎士|不死族)/;
+    const __kolaAggro = _0x4e1 => !!_0x4e1 && (__kolaAggroList.has(_0x4e1.n) || __kolaAggroUnd.test(_0x4e1.n || "") || _0x4e1.hp < _0x4e1.maxHp);
     function _0x50b18a(_0x5612d4, _0x28d4a0) {
       const _0xcaf23c = _0x99b6df();
       _0x412d79.filter(Boolean).forEach(_0x398934 => {
         const _0x395650 = _0x412d79.indexOf(_0x398934);
-        if (!(_0x398934.hp <= 0) && !(_0x5612d4.hp <= 0) && (!window.__kolaFar || !window.__kolaFar[_0x395650])) {
+        if (!(_0x398934.hp <= 0) && !(_0x5612d4.hp <= 0) && (_0x39ac12 ? __kolaAggro(_0x398934) : !window.__kolaFar || !window.__kolaFar[_0x395650])) {
           if (!_0x398934.nextAt) {
             _0x398934.nextAt = _0xcaf23c + 1000;
             if (_0x398934.n === "恐怖的吸血鬼") {
@@ -23089,7 +23093,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
             icon: _0x56593b(_0x38b900),
             price: _0x151d8e[_0x38b900].buy || _0x151d8e[_0x38b900].sell * 2,
             pack: _0x5eb9a3.includes(_0x38b900) ? 1000 : 1
-          })).concat(Object.keys(_0xf8a0e9).concat(["中秋勳章", "錄影推廣勳章", "月卡禮包"]).map(_0x22ee2f => ({
+          })).concat(["中秋勳章", "錄影推廣勳章", "月卡禮包"].map(_0x22ee2f => ({
             id: "flat:" + _0x22ee2f,
             n: _0x22ee2f,
             icon: _0x56593b(_0x22ee2f),
@@ -31363,6 +31367,9 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
         const _0x2e7e39 = /^flat:/.test(_0x481935);
         const _0x114eb5 = String(_0x481935).replace(/^(buy|flat):/, "");
         const _0x27aa8c = _0x151d8e[_0x114eb5];
+        if (/^測試禮盒/.test(_0x114eb5)) {
+          return _0x2cd23c("測試禮盒已下架");
+        }
         const _0xe22e9 = _0x27aa8c && (_0x2e7e39 ? ["測試禮盒(黑暗妖精)", "測試禮盒(法師)", "測試禮盒(騎士)", "測試禮盒(妖精)", "中秋勳章", "錄影推廣勳章", "月卡禮包"].includes(_0x114eb5) ? 1 : 100 : _0x27aa8c.buy || _0x27aa8c.sell * 2);
         if (!_0xe22e9) {
           return;
