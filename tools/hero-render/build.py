@@ -4,8 +4,8 @@ SRC = sys.argv[1]; OUT = sys.argv[2]
 os.makedirs(OUT, exist_ok=True)
 meta = json.load(open(f'{SRC}/meta.json'))
 NF = {'idle': 6, 'walk': 8, 'attack': 6, 'hurt': 2}
-HERO = {0: 'guanyu', 1: 'lubu', 2: 'zhaoyun', 3: 'c_knight_m'}
-TRAIL = {0: (150, 255, 190), 1: (255, 140, 90), 2: (170, 215, 255), 3: (220, 230, 255)}
+HERO = {0: 'guanyu', 1: 'lubu', 2: 'zhaoyun', 3: 'c_knight_m', 4: 'c_knight_f', 5: 'c_elf_m', 6: 'c_elf_f', 7: 'c_mage_m', 8: 'c_mage_f', 9: 'c_dark_m', 10: 'c_dark_f'}
+TRAIL = {0: (150, 255, 190), 1: (255, 140, 90), 2: (170, 215, 255), 3: (220, 230, 255), 4: (220, 230, 255), 5: (170, 255, 170), 6: (170, 255, 170), 7: (140, 180, 255), 8: (140, 180, 255), 9: (210, 150, 255), 10: (210, 150, 255)}
 SS = 2
 
 def catmull(pts, n=10):
