@@ -111,7 +111,7 @@
       } = await _0xb28040.from("settings").select("key,value");
       const _0x1591bc = window.__mockDB.get();
       for (const _0x2fb91d of _0x726a2e || []) {
-        if (["serverLevel", "spawnSec", "rareRate", "hitNew", "rankEquip", "dmgNew", "wolfAtk", "prideLv", "goldMul", "goldRate", "dropMul", "wbHp", "wbAtk", "olinHp", "olinAtk", "jenisWbHp", "jenisWbAtk", "duelCloakSec", "duelScrollSec", "duelDayEpoch", "duelCloakDelay", "duelTitleMin", "duelEpoch", "wbHit", "magMul", "ipMax", "townMp", "duelAlly", "duelCharm", "duelStun", "curseSw", "curseN", "prideLow", "pride20", "jenisP", "plMagMul", "prideHigh", "pride21Lv", "monMagP", "nmSealSec", "impSealP", "vampSealP", "vampAmpP", "vampAmpSec", "vampAmpCd", "vampDrain", "vampHits", "vampRespawnSec", "nmSlowSec", "nmFreqP", "prideHitB", "prideHitBase", "holyMul", "hurtKnight", "hurtElf", "hurtDark", "hurtMage", "duelHit50", "duelHitStep", "duelHitCap", "duelHitFloor", "duelHitRing", "duelDefDiv", "duelDefMin", "acPen", "acLooseKnight", "acLooseElf", "acLooseDark", "acLooseMage", "duelAllyMul", "monHitLv", "monCrit", "monCritMul", "wbDrop", "acHard", "jenisExp", "jenisDrop", "wbFeedSec", "duelStunBase", "duelStunMrDiv", "sumAcDiv", "adminNewLv", "wbIdleSec", "wbMinPct", "duelHpMul", "duelPots", "duelWinMax", "duelBreakHit", "duelSpdMul", "idleMin"].includes(_0x2fb91d.key)) {
+        if (["serverLevel", "spawnSec", "rareRate", "hitNew", "rankEquip", "dmgNew", "wolfAtk", "prideLv", "goldMul", "goldRate", "expMul", "dropMul", "wbHp", "wbAtk", "olinHp", "olinAtk", "jenisWbHp", "jenisWbAtk", "duelCloakSec", "duelScrollSec", "duelDayEpoch", "duelCloakDelay", "duelTitleMin", "duelEpoch", "wbHit", "magMul", "ipMax", "townMp", "duelAlly", "duelCharm", "duelStun", "curseSw", "curseN", "prideLow", "pride20", "jenisP", "plMagMul", "prideHigh", "pride21Lv", "monMagP", "nmSealSec", "impSealP", "vampSealP", "vampAmpP", "vampAmpSec", "vampAmpCd", "vampDrain", "vampHits", "vampRespawnSec", "nmSlowSec", "nmFreqP", "prideHitB", "prideHitBase", "holyMul", "hurtKnight", "hurtElf", "hurtDark", "hurtMage", "duelHit50", "duelHitStep", "duelHitCap", "duelHitFloor", "duelHitRing", "duelDefDiv", "duelDefMin", "acPen", "acLooseKnight", "acLooseElf", "acLooseDark", "acLooseMage", "duelAllyMul", "monHitLv", "monCrit", "monCritMul", "wbDrop", "acHard", "jenisExp", "jenisDrop", "wbFeedSec", "duelStunBase", "duelStunMrDiv", "sumAcDiv", "adminNewLv", "wbIdleSec", "wbMinPct", "duelHpMul", "duelPots", "duelWinMax", "duelBreakHit", "duelSpdMul", "idleMin"].includes(_0x2fb91d.key)) {
           _0x1591bc[_0x2fb91d.key] = +_0x2fb91d.value;
         }
       }
@@ -19098,7 +19098,7 @@
       }
       const _0x2165d8 = _0x6a2bd7(_0x1097bf);
       const _0x4a96de = Math.round(_0x49c638.maxHp * _0x2a978b() * (1 + _0x2165d8[1] / 100) * (_0x174316() ? 2 : 1));
-      const _0x3133b6 = Math.round(_0x49c638.exp * _0x1358cc / _0x206444 * _0xbe3192(_0x1097bf.level) * _0x439510(_0x1097bf.level - _0x49c638.lv) * (1 + (_0x1097bf.dollExp || 0) / 100) * (1 + (_0x1097bf.codexExp || 0) / 100) * (1 + _0x2165d8[0] / 100) * _0x2cb18d("expMul", 5));
+      const _0x3133b6 = Math.round(_0x49c638.exp * _0x1358cc / _0x206444 * _0xbe3192(_0x1097bf.level) * _0x439510(_0x1097bf.level - _0x49c638.lv) * (1 + (_0x1097bf.dollExp || 0) / 100) * (1 + (_0x1097bf.codexExp || 0) / 100) * (1 + _0x2165d8[0] / 100) * _0x2cb18d("expMul", 2));
       _0x1097bf.exp += _0x3133b6;
       _0x1097bf.gold += _0x4a96de;
       _0x1097bf.kills++;
@@ -19129,7 +19129,7 @@
       _0x1097bf.align = Math.min(_0x4213cd, (_0x1097bf.align || 0) + 1);
       const _0x26d082 = _0xbe3192(_0x1097bf.level);
       const _0x7b4ac1 = _0x439510(_0x1097bf.level - _0x49c638.lv);
-      _0xbe0b42("擊殺 " + _0x49c638.n + "，+" + _0x3133b6 + " 經驗 +" + _0x4a96de + " 金幣（基礎經驗 " + _0x49c638.exp + (_0x26d082 > 1 ? " × 伺服器追趕 " + _0x26d082 + " 倍" : "") + (_0x2cb18d("expMul", 5) !== 1 ? " × 經驗倍率 " + _0x2cb18d("expMul", 5) : "") + (_0x7b4ac1 < 1 ? " × 等級差 " + Math.round(_0x7b4ac1 * 100) + "%" : "") + "）");
+      _0xbe0b42("擊殺 " + _0x49c638.n + "，+" + _0x3133b6 + " 經驗 +" + _0x4a96de + " 金幣（基礎經驗 " + _0x49c638.exp + (_0x26d082 > 1 ? " × 伺服器追趕 " + _0x26d082 + " 倍" : "") + (_0x2cb18d("expMul", 2) !== 1 ? " × 經驗倍率 " + _0x2cb18d("expMul", 2) : "") + (_0x7b4ac1 < 1 ? " × 等級差 " + Math.round(_0x7b4ac1 * 100) + "%" : "") + "）");
       (function (_0x2cd4b0) {
         const _0x27ab43 = (_0x4167d7(_0x497ad9) || {}).name;
         for (const _0x27b39f of _0x10d6d6) {
@@ -20208,7 +20208,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
       } else {
         _0x72611d.coDead = false;
         if (_0x72611d.hp <= 0) {
-          const _0x26bd5c = _0x4fecf8 && _0x72611d.level < _0xebb19 ? Math.min(Math.max(0, Math.floor(_0x72611d.exp)), Math.floor(_0xfe760b(_0x72611d.level) * 0.05)) : 0;
+          const _0x26bd5c = _0x72611d.level < _0xebb19 ? Math.min(Math.max(0, Math.floor(_0x72611d.exp)), Math.floor(_0xfe760b(_0x72611d.level) * 0.05)) : 0;
           _0x72611d.exp = Math.max(0, _0x72611d.exp - _0x26bd5c);
           const _0x3e8fe9 = _0x4167d7(__kNearTown(_0x497ad9)) || _0x4167d7(_0x72611d.home) || _0x4167d7(_0x4345b7);
           if (_0x72611d.poly) {
@@ -21503,7 +21503,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
       };
       const _0x23e346 = (_0x4ac22b[_0x1d8ebe.n] || {}).exp || _0x1d8ebe.lv * 500;
       const _0x446c37 = _0x6a2bd7(_0x357067);
-      const _0x46c049 = Math.round(_0x23e346 * 10 / _0x23675a.members.length * _0xbe3192(_0x357067.level) * (1 + (_0x357067.dollExp || 0) / 100) * (1 + (_0x357067.codexExp || 0) / 100) * (1 + _0x446c37[0] / 100) * _0x2cb18d("expMul", 5));
+      const _0x46c049 = Math.round(_0x23e346 * 10 / _0x23675a.members.length * _0xbe3192(_0x357067.level) * (1 + (_0x357067.dollExp || 0) / 100) * (1 + (_0x357067.codexExp || 0) / 100) * (1 + _0x446c37[0] / 100) * _0x2cb18d("expMul", 2));
       const _0x150aa6 = Math.round(_0x23675a.lv * 2000 / _0x23675a.members.length * _0x2a978b() * (1 + _0x446c37[1] / 100));
       _0x357067.exp += _0x46c049;
       _0x357067.gold += _0x150aa6;
