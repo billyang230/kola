@@ -4,8 +4,8 @@ SRC = sys.argv[1]; OUT = sys.argv[2]
 os.makedirs(OUT, exist_ok=True)
 meta = json.load(open(f'{SRC}/meta.json'))
 NF = {'idle': 6, 'walk': 8, 'attack': 6, 'hurt': 2}
-HERO = {0: 'guanyu', 1: 'lubu', 2: 'zhaoyun'}
-TRAIL = {0: (150, 255, 190), 1: (255, 140, 90), 2: (170, 215, 255)}
+HERO = {0: 'guanyu', 1: 'lubu', 2: 'zhaoyun', 3: 'c_knight_m'}
+TRAIL = {0: (150, 255, 190), 1: (255, 140, 90), 2: (170, 215, 255), 3: (220, 230, 255)}
 SS = 2
 
 def catmull(pts, n=10):
@@ -57,7 +57,7 @@ def outline(im):
     out = ol.copy(); out.alpha_composite(im)
     return out
 
-for hero in (0, 1, 2):
+for hero in [int(x) for x in (sys.argv[3] if len(sys.argv) > 3 else '0,1,2').split(',')]:
     frames = []
     for view in ('front', 'back'):
         for anim, nf in NF.items():

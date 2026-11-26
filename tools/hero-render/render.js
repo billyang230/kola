@@ -17,7 +17,7 @@ fs.mkdirSync(OUT, { recursive: true });
   const b = await chromium.launch({ args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader'] });
   const p = await b.newPage();
   p.on('console', m => console.log('[page]', m.text()));
-  const src = fs.readFileSync(path.join(__dirname, 'shader.glsl'), 'utf8');
+  const src = fs.readFileSync(path.join(__dirname, process.env.SHADER||'shader.glsl'), 'utf8');
   await p.evaluate(([src, W, H]) => {
     const c = document.createElement('canvas'); c.width = W; c.height = H; document.body.appendChild(c);
     const g = c.getContext('webgl2', { preserveDrawingBuffer: true, premultipliedAlpha: false, antialias: false });
