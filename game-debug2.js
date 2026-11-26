@@ -18703,11 +18703,11 @@
     };
     const _0x4c8eef = () => _0x5994c9.rareRate ?? 0.01;
     const _0x5120ba = _0x4735c8 => /^★|^(神官|武官)/.test(_0x4735c8);
-    const _0x2a978b = () => 5 * _0x2cb18d("goldRate", 2); // 金幣倍率：1 = 原本，預設 2 倍
+    const _0x2a978b = () => _0x2cb18d("goldRate", 2); // 金幣倍率：打怪金幣 = 怪物血量 × 倍率（預設 2）
     const _0x3ac7e1 = () => _0x2cb18d("dropX", 1);
     window.__econ = () => ({
       drop: _0x3ac7e1(),
-      gold: _0x2a978b() / 5,
+      gold: _0x2a978b(),
       wb: _0x25ccc9()
     });
     const _0x44ea26 = {
@@ -24395,10 +24395,10 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
           ask: "傲慢之塔 11F 以上進場等級"
         }, {
           label: "金幣倍率",
-          val: "×" + _0x2a978b() / 5,
-          raw: _0x2a978b() / 5,
+          val: "×" + _0x2a978b(),
+          raw: _0x2a978b(),
           ev: "mockSetGoldMul",
-          ask: "金幣倍率\n1 = 原本的金幣，2 = 兩倍（預設 2）"
+          ask: "金幣倍率\n打怪金幣 = 怪物血量 × 倍率（預設 2）"
         }, {
           label: "掉寶倍率",
           val: "×" + _0x3ac7e1() / 5 + "（實際 ×" + _0x3ac7e1() + "）",
