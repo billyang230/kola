@@ -32094,6 +32094,17 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
           }
         })(_0x29e19e, _0x281d24, _0x3e8a08, _0x297ccb);
       },
+      polyCancel() {
+        const _kc = _0x29e19e;
+        if (!_kc) return;
+        const _kh = !!_kc.poly;
+        delete _kc.poly;
+        _kc.polyPick = null;
+        if (_kc.auto) _kc.auto.poly = false;
+        _0x3a5c90(_kc);
+        _0xbe0b42(_kh ? "已解除變身，並關閉自動變身（要再變身，到自動設定打開即可）" : "目前沒有變身；已關閉自動變身");
+        _0x27779d();
+      },
       polyPick(_0x3a1215) {
         const _0x4d5ab4 = _0x29e19e;
         const _0x321b87 = _0x3b3c42[_0x3a1215];
@@ -34037,7 +34048,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
       _0x122080.last = _0x84316d;
       return false;
     }
-    const _0x412fcd = new Set(["createChar", "deleteChar", "equip", "unequip", "buyItem", "useItem", "learnBook", "enhance", "enhanceInv", "enhanceSafeInv", "allocStat", "masteryAuraActivate", "mockMasteryAbility", "masteryContribute", "masteryBreakthrough", "polyPick", "polyUnlock", "bianBless", "bianUncurse", "craftAction", "scrollRefine", "prayBless", "prayReroll", "bossAction", "bossKillAck", "codexReg", "pandora", "pandora10", "wbGacha", "trialExchange", "sellItem", "sellItemAll", "doExchange", "chooseElfEle", "petMasteryUp", "petMasteryReset", "pledgeInvest"]);
+    const _0x412fcd = new Set(["createChar", "deleteChar", "equip", "unequip", "buyItem", "useItem", "learnBook", "enhance", "enhanceInv", "enhanceSafeInv", "allocStat", "masteryAuraActivate", "mockMasteryAbility", "masteryContribute", "masteryBreakthrough", "polyPick", "polyCancel", "polyUnlock", "bianBless", "bianUncurse", "craftAction", "scrollRefine", "prayBless", "prayReroll", "bossAction", "bossKillAck", "codexReg", "pandora", "pandora10", "wbGacha", "trialExchange", "sellItem", "sellItemAll", "doExchange", "chooseElfEle", "petMasteryUp", "petMasteryReset", "pledgeInvest"]);
     function _0x12d6f4(_0x146e4f, _0x279363, _0x2600cf) {
       _0x2600cf = _0x2600cf || _0x29e19e;
       if (_0x2134e9 && _0x2134e9.log && _0x2600cf) {
