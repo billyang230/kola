@@ -1,5 +1,5 @@
 // 可樂測試服：快取靜態檔，第二次起開啟幾乎秒開
-const V = "kola-sw-2";
+const V = "kola-sw-3";
 const STATIC = /\/(assets\/|vendor\/|boot-pack-[^/]+\.json$|assets-index\.json$)/;
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", e => {
@@ -22,7 +22,8 @@ self.addEventListener("fetch", e => {
     }));
   } else {
     // 程式與網頁：優先拿最新，斷線才用快取
-    e.respondWith(fetch(r).then(res => {
+    // 不用瀏覽器 HTTP 快取（GitHub Pages 會快取 10 分鐘），每次都向伺服器確認最新版
+    e.respondWith(fetch(u.href, { cache: "no-cache", credentials: "same-origin" }).then(res => {
       if (res.ok) caches.open(V).then(c => c.put(r, res.clone()));
       return res;
     }).catch(() => caches.match(r)));
