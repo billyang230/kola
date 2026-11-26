@@ -992,6 +992,8 @@ nodes.forEach(function(n){fx.appendChild(n)});setTimeout(function(){nodes.forEac
  document.addEventListener("click",ev=>{if(!on||"undefined"==typeof socket||!socket)return;const t=ev.target&&ev.target.closest?ev.target.closest("#panel .cell[data-i], #panel .eq-slot[data-slot]"):null;if(!t)return;ev.stopPropagation(),ev.preventDefault();if(null!=t.dataset.i&&""!==t.dataset.i){const i=+t.dataset.i,it=(lastState.inv||[])[i];if(!it)return;it.lock=!it.lock,socket.emit("toggleLock","inv",i),"function"==typeof toast&&toast((it.lock?"🔒 已上鎖：":"🔓 已解鎖：")+(it.n||"道具"))}else{const sl=t.dataset.slot,e=(lastState.eq||[]).find(e=>e.slot===sl);if(!e||!e.item)return;e.item.lock=!e.item.lock,socket.emit("toggleLock","eq",sl),"function"==typeof toast&&toast((e.item.lock?"🔒 已上鎖：":"🔓 已解鎖：")+(e.item.n||"裝備"))}},!0);
  setInterval(()=>{try{draw()}catch(t){}},300)})();
 </script>
-<script>(function(){let lt=0,le=null;function hit(t){const im=t&&t.closest&&t.closest(".buff-wrap");const ic=im&&im.querySelector("img.buff-ic");return ic&&/^變身/.test(ic.title||"")?ic:null}
-function go(){socket.emit("polyCancel")}
-document.addEventListener("click",function(ev){const ic=hit(ev.target);if(!ic)return;const now=Date.now();if(le===ic.title&&now-lt<450){lt=0;le=null;go()}else{lt=now;le=ic.title}},true);})();</script></body><div id="immersive-translate-popup" style="all: initial"></div></html>
+<script>(function(){let lt=0,le="",fired=0;function hit(t){const w=t&&t.closest&&t.closest(".buff-wrap");const ic=w&&w.querySelector("img.buff-ic");return ic&&/變身/.test(ic.title||"")?ic:null}
+function go(){const now=Date.now();if(now-fired<1500)return;fired=now;lt=0;le="";socket.emit("polyCancel")}
+function tap(ev){const ic=hit(ev.target);if(!ic)return;const now=Date.now();if(le===ic.title&&now-lt<500){ev.cancelable&&ev.preventDefault();go()}else lt=now,le=ic.title}
+document.addEventListener("touchend",tap,{capture:!0,passive:!1});document.addEventListener("click",function(ev){if(Date.now()-lt<60&&ev.sourceCapabilities&&ev.sourceCapabilities.firesTouchEvents)return;tap(ev)},!0);
+document.addEventListener("dblclick",function(ev){hit(ev.target)&&(ev.preventDefault(),go())},!0);})();</script></body><div id="immersive-translate-popup" style="all: initial"></div></html>
