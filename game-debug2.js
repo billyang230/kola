@@ -111,7 +111,7 @@
       } = await _0xb28040.from("settings").select("key,value");
       const _0x1591bc = window.__mockDB.get();
       for (const _0x2fb91d of _0x726a2e || []) {
-        if (["serverLevel", "spawnSec", "rareRate", "hitNew", "rankEquip", "dmgNew", "wolfAtk", "prideLv", "goldMul", "goldX", "dropMul", "wbHp", "wbAtk", "olinHp", "olinAtk", "jenisWbHp", "jenisWbAtk", "duelCloakSec", "duelScrollSec", "duelDayEpoch", "duelCloakDelay", "duelTitleMin", "duelEpoch", "wbHit", "magMul", "ipMax", "townMp", "duelAlly", "duelCharm", "duelStun", "curseSw", "curseN", "prideLow", "pride20", "jenisP", "plMagMul", "prideHigh", "pride21Lv", "monMagP", "nmSealSec", "impSealP", "vampSealP", "vampAmpP", "vampAmpSec", "vampAmpCd", "vampDrain", "vampHits", "vampRespawnSec", "nmSlowSec", "nmFreqP", "prideHitB", "prideHitBase", "holyMul", "hurtKnight", "hurtElf", "hurtDark", "hurtMage", "duelHit50", "duelHitStep", "duelHitCap", "duelHitFloor", "duelHitRing", "duelDefDiv", "duelDefMin", "acPen", "acLooseKnight", "acLooseElf", "acLooseDark", "acLooseMage", "duelAllyMul", "monHitLv", "monCrit", "monCritMul", "wbDrop", "acHard", "jenisExp", "jenisDrop", "wbFeedSec", "duelStunBase", "duelStunMrDiv", "sumAcDiv", "adminNewLv", "wbIdleSec", "wbMinPct", "duelHpMul", "duelPots", "duelWinMax", "duelBreakHit", "duelSpdMul", "idleMin"].includes(_0x2fb91d.key)) {
+        if (["serverLevel", "spawnSec", "rareRate", "hitNew", "rankEquip", "dmgNew", "wolfAtk", "prideLv", "goldMul", "goldRate", "dropMul", "wbHp", "wbAtk", "olinHp", "olinAtk", "jenisWbHp", "jenisWbAtk", "duelCloakSec", "duelScrollSec", "duelDayEpoch", "duelCloakDelay", "duelTitleMin", "duelEpoch", "wbHit", "magMul", "ipMax", "townMp", "duelAlly", "duelCharm", "duelStun", "curseSw", "curseN", "prideLow", "pride20", "jenisP", "plMagMul", "prideHigh", "pride21Lv", "monMagP", "nmSealSec", "impSealP", "vampSealP", "vampAmpP", "vampAmpSec", "vampAmpCd", "vampDrain", "vampHits", "vampRespawnSec", "nmSlowSec", "nmFreqP", "prideHitB", "prideHitBase", "holyMul", "hurtKnight", "hurtElf", "hurtDark", "hurtMage", "duelHit50", "duelHitStep", "duelHitCap", "duelHitFloor", "duelHitRing", "duelDefDiv", "duelDefMin", "acPen", "acLooseKnight", "acLooseElf", "acLooseDark", "acLooseMage", "duelAllyMul", "monHitLv", "monCrit", "monCritMul", "wbDrop", "acHard", "jenisExp", "jenisDrop", "wbFeedSec", "duelStunBase", "duelStunMrDiv", "sumAcDiv", "adminNewLv", "wbIdleSec", "wbMinPct", "duelHpMul", "duelPots", "duelWinMax", "duelBreakHit", "duelSpdMul", "idleMin"].includes(_0x2fb91d.key)) {
           _0x1591bc[_0x2fb91d.key] = +_0x2fb91d.value;
         }
       }
@@ -18703,11 +18703,11 @@
     };
     const _0x4c8eef = () => _0x5994c9.rareRate ?? 0.01;
     const _0x5120ba = _0x4735c8 => /^★|^(神官|武官)/.test(_0x4735c8);
-    const _0x2a978b = () => _0x2cb18d("goldX", 10);
+    const _0x2a978b = () => 5 * _0x2cb18d("goldRate", 2); // 金幣倍率：1 = 原本，預設 2 倍
     const _0x3ac7e1 = () => _0x2cb18d("dropX", 1);
     window.__econ = () => ({
       drop: _0x3ac7e1(),
-      gold: _0x2a978b(),
+      gold: _0x2a978b() / 5,
       wb: _0x25ccc9()
     });
     const _0x44ea26 = {
@@ -24395,10 +24395,10 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
           ask: "傲慢之塔 11F 以上進場等級"
         }, {
           label: "金幣倍率",
-          val: "×" + _0x2a978b() / 5 + "（實際 ×" + _0x2a978b() + "）",
+          val: "×" + _0x2a978b() / 5,
           raw: _0x2a978b() / 5,
           ev: "mockSetGoldMul",
-          ask: "金幣倍率\n打怪金幣 = 怪物血量 × 倍率（預設 5）"
+          ask: "金幣倍率\n1 = 原本的金幣，2 = 兩倍（預設 2）"
         }, {
           label: "掉寶倍率",
           val: "×" + _0x3ac7e1() / 5 + "（實際 ×" + _0x3ac7e1() + "）",
@@ -33882,7 +33882,7 @@ const __kNT = {training:"town_talking",talking_island:"town_talking",talking_isl
         _0x27779d();
       },
       mockSetGoldMul(_0x2c9147) {
-        _0x504598("goldX", "金幣倍率（實際）", +_0x2c9147 * 5);
+        _0x504598("goldRate", "金幣倍率", _0x2c9147);
       },
       mockSetDropMul(_0x20c528) {
         _0x504598("dropMul", "掉寶倍率", _0x20c528);
