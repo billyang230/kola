@@ -83,13 +83,13 @@ for hero in [int(x) for x in (sys.argv[3] if len(sys.argv) > 3 else '0,1,2').spl
                 bb = sm.getbbox()
                 c = sm.crop(bb)
                 foot = meta[k]['foot']
-                frames.append((f'{view}_{anim}_{f}', c, bb[0], bb[1], foot))
+                frames.append((f'{view}_{anim}_{f}', c, bb[0], bb[1], foot, meta[k].get('g'), meta[k].get('t')))
     # shelf pack
     W = 1024
     frames_sorted = sorted(frames, key=lambda t: -t[1].height)
     x = y = sh = 0
     pos = {}
-    for name, c, bx, by, foot in frames_sorted:
+    for name, c, bx, by, foot, *_ in frames_sorted:
         if x + c.width > W:
             x = 0; y += sh + 1; sh = 0
         pos[name] = (x, y)
@@ -97,10 +97,12 @@ for hero in [int(x) for x in (sys.argv[3] if len(sys.argv) > 3 else '0,1,2').spl
     H = y + sh
     atlas = Image.new('RGBA', (W, H), (0, 0, 0, 0))
     info = {}
-    for name, c, bx, by, foot in frames:
+    for name, c, bx, by, foot, wg, wt in frames:
         px, py = pos[name]
         atlas.alpha_composite(c, (px, py))
         info[name] = [px, py, c.width, c.height, round(foot[0] - bx, 1), round(foot[1] - by, 1)]
+        if wg and wt:
+            info[name] += [round(wg[0] - bx, 1), round(wg[1] - by, 1), round(wt[0] - bx, 1), round(wt[1] - by, 1)]
     nm = HERO[hero]
     atlas.save(f'{OUT}/{nm}.png', optimize=True)
     atlas.save(f'{OUT}/{nm}.webp', lossless=True, method=6)
